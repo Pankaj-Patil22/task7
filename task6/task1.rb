@@ -26,3 +26,36 @@ class Serial
         end
     end
 end
+
+class HashTest
+
+    attr_accessor :hash
+
+    def initialize
+        @hash = {"a" => 1, "b" => 2, "c" => 3, 12=>54, 34=>21, 56=>78, 11=>22, 33=>44, 55=>66}
+        @hash.store(543121, 100)
+    end
+
+    def add_element(key, value)
+       begin
+            #raise exception if key already exists
+            raise Exception,"Key already exists cannot modify" if @hash.has_key?(key)
+            @hash.store(key, value) 
+       rescue Exception 
+            return "Key already exists cannot modify" 
+       end
+    end
+    
+    def retain_if_integer
+        @hash.delete_if {|key, value| key.is_a?(Integer) == false}
+    end
+
+    def delete_if_even
+        @hash.delete_if {|key, value| key.is_a?(Integer) == true && key % 2 == 0}
+    end
+
+    def print_hash
+        puts @hash
+    end
+
+end
